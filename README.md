@@ -59,6 +59,6 @@ USER STORIES:
 
 	Acceptance Criteria:
 	   
-	   	-The message view automatically scrolls to the latest message only if the user is already at the bottom.
+		-The message view automatically scrolls to the latest message only if the user is already at the bottom.
 		
 	 	-If the user has scrolled up to read old messages, auto-scroll does not happen.
