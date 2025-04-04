@@ -1,132 +1,40 @@
-<<<<<<< HEAD
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ZsVpnoG6)
-# Lab 3
+USER STORIES:
+1) As a registered user, i want to view a list of all users registered on the system, so that i can choose someone to start a conversation.
+Acceptance Criteria:
+  -The user list displays all currently registered users except myself.
+  -The list should be searchable or scrollable.
 
-## Create your first ruby and rails application
+2) As a registered user, i want search users by the name, so that i can find the user i was looking for.
+Acceptance Critieria:
+  -The user list has a search bar
+  -The requested name is matched with a user with the same name.
 
-In this evaluation, you will be asked to create a simple web application using Ruby on Rails. The application will be a simple Twitter clone, with name `Y`.
+3) As a user looking for a conversation, i want to select a user from the users list, so that i can start a direct conversation with him.
+Acceptance Criteria:
+  -Clicking on a user opens a message view with that user.
+  -A text input field is available to compose and send messages.
 
-## Pre-Instructions
+4) As a someone in an active conversation, i want to send and read a text message to the selected user, so that i can chat with him.
+Acceptance Criteria:
+  -Sent messages appear immediately in the message view.
+  -New messages appear in real time in the same view.
 
-You need to have installed ruby and rails in your computer. If you don't have it installed, follow the instructions below:
+5) As a registered user, i want to se the complete message history with the selected user, so thath i can read previous messages and continue the conversation.
+Acceptance Criteria:
+  -All past messages in the conversation are shown in chronological order.
+  -Messages I sent and messages I received are visually distinguishable.
 
-### Windows
+6) As a frequent user, i want to see a list of my ongoing conversation, so that I can easily access my previous conversations without having to search through the entire users list.
+Acceptance Criteria:
+  -The chat list displays users to whom I have previously sent or received messages.
+  -The chat list is sorted from newest to oldest.
 
-Follow the instructions in the following link to install the required tools:
+7) As a registered user, i want to see witch conversation have unread messages, so that i can quickly respond to new message.
+Acceptance Criteria:
+  -The chat list shows a visual indicator to unread messages.
+  -The indicator dissapears when i open the chat.
 
-[Install Ruby on Rails on Windows](https://brainy-barometer-470.notion.site/Install-Ruby-on-Rails-on-Windows-62a5e4ec60bb4697add5b3dd0fd56dac)
-
-### MacOS
-
-Follow the instructions in the following link to install the required tools:
-
-[Install Ruby on Rails on MacOS](https://brainy-barometer-470.notion.site/Install-Ruby-on-Mac-39646e886a2441c683f0483b44d5511b?pvs=4)
-
-## Instructions
-
-### Creation new Rails Application
-
-Create a new Rails application with postgres and boostrap called `twitter`:
-
-``` bash
-rails new Y --database=postgresql -j esbuild --css bootstrap
-```
-
-Now you need create a database for the application:
-
-``` bash
-rails db:create
-```
-
-Next step check if the application is running:
-
-``` bash
-rails server
-```
-
-## Requirements
-
-* Create landing page using bootstrap with the following elements:
-  * Navigation bar with the following functional links:
-    * Home
-    * About
-    * Contact
-  * Home page with the following elements:
-    * Title
-    * Subtitle
-  * About page with the following elements:
-    * Title
-    * Subtitle
-    * Description
-  * Contact page with the following elements:
-    * Form with the following fields:
-      * Name
-      * Email
-      * Message
-      * Submit button
-      * When the form is submitted, the application should show a message with the following text: "Thank you for your message, we will contact you soon."
-  * Footer with the following elements:
-    * Copyrigth
-    * Social media links (not functional)
-
-* Create 3 routes for the following pages:
-  * Home -> /
-  * About -> /about
-  * Contact -> /contact
-
-* Important if elements is common to all pages, you should create in layout file.
-* The application should have bootstrap design.
-
-### Submission
-
-#### Create a repository
-
-Create a new repository public in your github account called `lab-3`
-
-#### Upload the code
-
-Upload the code to the repository created in the previous step. follow the instructions below:
-
-1. go to root folder of the project
-
-``` bash
-cd Y
-```
-
-2. Set the remote repository link
-
-``` bash
-git remote add origin git@github.com:username/lab-3.git
-git branch -M main
-git push -u origin main
-```
-
-#### Submit the repository link
-
-Upload the repository link to Canvas.
-=======
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
->>>>>>> 23bfb9e (Lab 03 funcionando)
+8) As a user with long conversations, i want to automatically scroll to the lastest message in a conversation, so that i dont miss any new replies.
+Acceptance Criteria:
+  -The message view automatically scrolls to the latest message only if the user is already at the bottom.
+  -If the user has scrolled up to read old messages, auto-scroll does not happen.
