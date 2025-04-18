@@ -1,0 +1,8 @@
+<h1>Chats</h1>
+<ul>
+<% @chats.each do |chat| %>
+<li>Sender ID: <%= link_to(chat.sender_id, chat_path(chat))%></li>
+
+<% end %>
+</ul>
+

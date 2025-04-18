@@ -8,7 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 # db/seeds.rb
-
+User.delete_all
+Chat.delete_all
+Message.delete_all
 
 10.times do |i|
     User.create(

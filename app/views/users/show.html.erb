@@ -1,0 +1,11 @@
+<h1>User Details</h1>
+<h2><%= link_to "Volver", users_path%></h2>
+
+<ul>
+  <li><strong>ID:</strong> <%= @users.id %></li>
+  <li><strong>Email:</strong> <%= @users.email %></li>
+  <li><strong>Name:</strong> <%= @users.first_name %></li>
+  <li><strong>Last Name:</strong> <%= @users.last_name %></li>
+  <li><strong>Created at:</strong> <%= @users.created_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li><strong>Última Updated at:</strong> <%= @users.updated_at.strftime("%d/%m/%Y %H:%M") %></li>
+</ul>

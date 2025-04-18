@@ -1,0 +1,11 @@
+<h1>Message Details</h1>
+<h2><%= link_to "Volver", messages_path%></h2>
+
+<ul>
+  <li><strong>ID:</strong> <%= @messages.id %></li>
+  <li><strong>Chat ID:</strong> <%= @messages.chat_id %></li>
+  <li><strong>User ID:</strong> <%= @messages.user_id %></li>
+  <li><strong>Message:</strong> <%= @messages.body %></li>
+  <li><strong>Created at:</strong> <%= @messages.created_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li><strong>Última Updated at:</strong> <%= @messages.updated_at.strftime("%d/%m/%Y %H:%M") %></li>
+</ul>

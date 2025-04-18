@@ -1,0 +1,10 @@
+<h1>Chats Details</h1>
+<h2><%= link_to "Volver", chats_path%></h2>
+
+<ul>
+  <li><strong>ID:</strong> <%= @chats.id %></li>
+  <li><strong>Sender ID:</strong> <%= @chats.sender_id %></li>
+  <li><strong>Receiver ID:</strong> <%= @chats.receiver_id %></li>
+  <li><strong>Created at:</strong> <%= @chats.created_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li><strong>Última Updated at:</strong> <%= @chats.updated_at.strftime("%d/%m/%Y %H:%M") %></li>
+</ul>
