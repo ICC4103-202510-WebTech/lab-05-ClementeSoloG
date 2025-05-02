@@ -1,0 +1,21 @@
+<h1>Create Message</h1>
+<%= form_with model: @message, local: true do |form| %> 
+    <div>
+        <%= form.label :chat_id, "Chat" %>
+        <%= form.select :chat_id, @chats.collect { |chat| ["Chat between #{chat.sender.first_name} and #{chat.receiver.first_name}", chat.id] }, prompt: "Select a chat" %>
+    </div>
+
+    <div >
+        <%= form.label :user_id, "Author" %>
+        <%= form.select :user_id, @users.collect { |user| [user.first_name, user.id] }, prompt: "Select an author" %>
+    </div>
+
+    <div>
+        <%= form.label :body, "Message Body" %>
+        <%= form.text_area :body %>
+    </div>
+
+    <div>
+        <%= form.submit "Send Message" %>
+    </div>
+<% end %>
