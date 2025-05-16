@@ -3,9 +3,26 @@
 <h2><%= link_to "Create new Chat", new_chat_path%></h2>
 
 <ul>
-  <li><strong>ID:</strong> <%= @chats.id %></li>
-  <li><strong>Sender ID:</strong> <%= @chats.sender_id %></li>
-  <li><strong>Receiver ID:</strong> <%= @chats.receiver_id %></li>
-  <li><strong>Created at:</strong> <%= @chats.created_at.strftime("%d/%m/%Y %H:%M") %></li>
-  <li><strong>Última Updated at:</strong> <%= @chats.updated_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li><strong>ID:</strong> <%= @chat.id %></li>
+  <li><strong>Sender:</strong> <%= @chat.sender.first_name %></li>
+  <li><strong>Receiver:</strong> <%= @chat.receiver.first_name %></li>
+  <li><strong>Created at:</strong> <%= @chat.created_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li><strong>Última Updated at:</strong> <%= @chat.updated_at.strftime("%d/%m/%Y %H:%M") %></li>
 </ul>
+
+<hr>
+
+<h2>Messages in this Chat</h2>
+<% if @chat.messages.any? %>
+  <ul>
+    <% @chat.messages.each do |message| %>
+      <li>
+        <strong><%= message.user.first_name %>:</strong>
+        <%= message.body %>
+        <%= message.created_at.strftime("%d/%m/%Y %H:%M") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No messages in this chat yet.</p>
+<% end %>

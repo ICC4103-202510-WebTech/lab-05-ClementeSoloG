@@ -1,9 +1,15 @@
 <h1>Messages</h1>
 <ul>
-<% @messages.each do |message| %>
-<li>Chat ID:<%= link_to(message.chat_id, message_path(message))%></li>
+    <% @messages.each do |message| %>
+        <li>Message ID:<%= link_to(message.id, message_path(message))%>
+        | <%= link_to "Edit", edit_message_path(message)%>
+        | <%= link_to "Delete", message_path(message), data: {
+            turbo_method: :delete,
+            turbo_confirm: "¿Are you sure you want to delete this message?"
+        }%>
+    </li>
 
-<% end %>
+    <% end %>
 </ul>
 
 <h2><%= link_to "Create new message", new_message_path%></h2>
