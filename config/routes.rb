@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   resources :users
   resources :chats
   resources :messages
+  root to: "static_pages#home"
+
 end
