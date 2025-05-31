@@ -1,6 +1,8 @@
 class MessagesController < ApplicationController
     before_action :set_message, only: [ :edit, :show, :update, :destroy]
     before_action :set_chats_and_users, only: [:new, :create, :edit, :update]
+    before_action :authenticate_dev!
+    
 
     def index
         @messages = Message.all

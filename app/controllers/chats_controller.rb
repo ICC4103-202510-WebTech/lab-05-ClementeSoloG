@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
     before_action :set_chat, only: [ :edit, :show, :update, :destroy]
     before_action :set_users, only: [:new, :create, :edit, :update]
+    before_action :authenticate_dev!
     def index
         @chats = Chat.all
     end
