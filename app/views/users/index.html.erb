@@ -1,15 +1,23 @@
 <h1>Users</h1>
 <ul>
-    <% @users.each do |user| %>
-        <li>Name: <%= link_to(user.first_name, user_path(user))%>
-        | <%= link_to "Edit", edit_user_path(user)%>
-        | <%= link_to "Delete", user_path(user), data: {
-            turbo_method: :delete,
-            turbo_confirm: "¿Are you sure you want to delete the user?"
-        }%></li>
+  <% @users.each do |user| %>
+    <li>
+      Name: <%= link_to user.first_name, user_path(user) %>
 
-    <% end %>
+      <% if can? :edit, user %>
+        | <%= link_to "Edit", edit_user_path(user) %>
+      <% end %>
+
+      <% if can? :destroy, user %>
+        | <%= link_to "Delete", user_path(user), data: {
+              turbo_method: :delete,
+              turbo_confirm: "¿Are you sure you want to delete the user?"
+            } %>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
 
-<h2><%= link_to "Create new user", new_user_path%></h2>
-
+<% if can? :create, User %>
+  <h2><%= link_to "Create new user", new_user_path %></h2>
+<% end %>

@@ -1,54 +1,59 @@
 class ChatsController < ApplicationController
-    before_action :set_chat, only: [ :edit, :show, :update, :destroy]
-    before_action :set_users, only: [:new, :create, :edit, :update]
-    def index
-        @chats = Chat.all
-    end
-    def show
-    end 
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
-    def new
-        @chat = Chat.new
-    end
-    
-    def create
-        @chat = Chat.new(chat_params)
-        if @chat.save
-            flash[:notice] = "Succesfully saved"
-            redirect_to chat_path(@chat), notice: 'Chat was successfully created.'
-        else
-            flash[:alert] = "#{@chat.errors.full_messages.join(", ")}"
-            redirect_to new_chat_path
-        end
-    end
+  before_action :set_users, only: [:new, :create, :edit, :update]
 
-    def edit
-    end
+  def index
+    # load_and_authorize_resource ya define @chats
+    # pero si quieres limitar solo a los chats del usuario actual:
+    @chats = Chat.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+  end
 
-    def update
-        if @chat.update chat_params
-            redirect_to chat_path(@chat)
-        else
-            redirect_to edit_message_path(@chat)
-        end
-    end
-    
-    def destroy
-        @chat.destroy
-        redirect_to chat_path
-    end
+  def show
+    # @chat ya está cargado por load_and_authorize_resource
+  end
 
-    private
-    
-    def chat_params
-        params.require(:chat).permit(:sender_id, :receiver_id)
-    end
+  def new
+    # @chat ya está inicializado por load_and_authorize_resource
+  end
 
-    def set_chat
-      @chat = Chat.find(params["id"])
-    end 
+  def create
+    @chat.sender = current_user
 
-    def set_users
-      @users = User.all
+    if @chat.save
+      redirect_to chat_path(@chat), notice: 'Chat was successfully created.'
+    else
+      flash[:alert] = @chat.errors.full_messages.join(", ")
+      render :new
     end
-end 
+  end
+
+  def edit
+  end
+
+  def update
+    if @chat.update(chat_params)
+      redirect_to chat_path(@chat)
+    else
+      flash[:alert] = @chat.errors.full_messages.join(", ")
+      render :edit
+    end
+  end
+
+  def destroy
+    @chat.destroy
+    redirect_to chats_path, notice: 'Chat was successfully deleted.'
+  end
+
+  private
+
+  def chat_params
+    params.require(:chat).permit(:receiver_id)
+    # Notamos que sender_id no se debe permitir por seguridad
+  end
+
+  def set_users
+    @users = User.where.not(id: current_user.id)
+  end
+end

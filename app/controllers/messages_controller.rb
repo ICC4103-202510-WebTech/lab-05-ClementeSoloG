@@ -1,57 +1,56 @@
 class MessagesController < ApplicationController
-    before_action :set_message, only: [ :edit, :show, :update, :destroy]
-    before_action :set_chats_and_users, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  before_action :set_chats, only: [:new, :create, :edit, :update]
 
-    def index
-        @messages = Message.all
-    end
+  def index
+    # Ya tienes @messages por load_and_authorize_resource
+  end
 
-    def show
-    end
-    
-    def new
-        @message = Message.new
-    end
-    
-    def create
-        @message = Message.new(message_params)
-        if @message.save
-          flash[:notice] = "Succesfully saved"
-          redirect_to message_path(@message), notice: 'Message was successfully created.'
-        else
-          flash[:alert] = "#{@message.errors.full_messages.join(", ")}"
-          redirect_to new_message_path
-        end
-    end
+  def show
+  end
 
-    def edit
-    end
+  def new
+    # @message ya creado por CanCanCan
+  end
 
-    def update
-        if @message.update message_params
-            redirect_to message_path(@message)
-        else
-            redirect_to edit_message_path(@message)
-        end
-    end
-    
-    def destroy
-        @message.destroy
-        redirect_to messages_path
-    end
-    
-      private
-    
-    def message_params
-        params.require(:message).permit(:chat_id, :user_id, :body)
-    end
+  def create
+    @message.user = current_user  
 
-    def set_message
-      @message = Message.find(params["id"])
+    if @message.save
+      redirect_to message_path(@message), notice: 'Message was successfully created.'
+    else
+      flash[:alert] = @message.errors.full_messages.join(", ")
+      render :new
     end
+  end
 
-    def set_chats_and_users
-      @chats = Chat.all
-      @users = User.all
+  def edit
+  end
+
+  def update
+    if @message.update(message_params)
+      redirect_to message_path(@message)
+    else
+      flash[:alert] = @message.errors.full_messages.join(", ")
+      render :edit
     end
-end 
+  end
+
+  def destroy
+    @message.destroy
+    redirect_to messages_path, notice: "Message deleted."
+  end
+
+  private
+
+  def message_params
+    # user_id ya no se permite aquí
+    params.require(:message).permit(:chat_id, :body)
+  end
+
+  def set_chats
+    # Para usar en el formulario como selector
+    @chats = Chat.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+  end
+end
