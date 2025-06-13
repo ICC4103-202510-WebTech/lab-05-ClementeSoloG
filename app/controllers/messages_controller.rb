@@ -5,7 +5,11 @@ class MessagesController < ApplicationController
 
   def index
     # Ya tienes @messages por load_and_authorize_resource
+    @messages = Message.joins(:chat)
+                   .where("chats.sender_id = ? OR chats.receiver_id = ?", current_user.id, current_user.id)
+
   end
+
 
   def show
   end

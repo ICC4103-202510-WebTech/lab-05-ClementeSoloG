@@ -1,6 +1,5 @@
 <h1>Chats Details</h1>
 <h2><%= link_to "Volver", chats_path%></h2>
-<h2><%= link_to "Create new Chat", new_chat_path%></h2>
 
 <ul>
   <li><strong>ID:</strong> <%= @chat.id %></li>
@@ -13,6 +12,7 @@
 <hr>
 
 <h2>Messages in this Chat</h2>
+<h2><%= link_to "Create new message", new_message_path %></h2>
 <% if @chat.messages.any? %>
   <ul>
     <% @chat.messages.each do |message| %>

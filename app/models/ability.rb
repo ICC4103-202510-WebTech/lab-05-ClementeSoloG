@@ -6,6 +6,7 @@ class Ability
 
     can :read, :all
     can :create, Message
+    can :create, Chat
     can [:update, :destroy], Message, user_id: user.id
     can [:update, :destroy], User, id: user.id
 

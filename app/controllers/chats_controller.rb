@@ -50,7 +50,6 @@ class ChatsController < ApplicationController
 
   def chat_params
     params.require(:chat).permit(:receiver_id)
-    # Notamos que sender_id no se debe permitir por seguridad
   end
 
   def set_users
